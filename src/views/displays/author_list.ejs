@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("../partials/head.ejs") %>
+
+  <body>
+    <%- include("../partials/layout.ejs")%>
+      <div class="right-panel">
+
+
+        <div class="dynamic-content" style="padding: 30px;">
+          <div class="dynamic-title">
+            <%= title %>
+          </div>
+          <ul class="author-list-ul">
+
+            <% author_list.forEach(author=> { %>
+              <li><a href=" <%= author.url %>">
+                  <%= author.name %>
+                </a>
+              </li>
+
+              <% }) %>
+          </ul>
+        </div>
+      </div>
+
+  </body>
+
+</html>

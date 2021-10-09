@@ -1,0 +1,278 @@
+*,
+:before,
+:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  /* min-height: 100vh; */
+}
+.sidebar-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+hr {
+  margin: 20px auto;
+}
+.unstyled {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.unstyled a {
+  text-decoration: none;
+}
+
+.list-inline {
+  overflow: hidden;
+}
+.list-inline li {
+  float: left;
+}
+
+.header {
+  width: 17.5em;
+  background: #35302d;
+  height: 100%;
+}
+.logo a {
+  display: block;
+  padding: 1em 0;
+  text-decoration: none;
+  transition: 0.15s linear color;
+}
+
+.logo {
+  font: 300 2em 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+span.local {
+  color: #ed7814;
+  transition: 0.3s linear color;
+}
+
+span.library {
+  color: #ffffff;
+  transition: 0.3s linear color;
+}
+
+.logo a:hover .library {
+  color: #ed7814;
+}
+.logo a:hover .local {
+  color: #ffffff;
+}
+
+.main-nav ul {
+  border-top: solid 1px #3c3735;
+}
+.main-nav li {
+  border-bottom: solid 1px #3c3735;
+}
+.main-nav a {
+  padding: 1.1em 0;
+  color: #dfdbd9;
+  font: 400 1.125em 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  text-align: center;
+  text-transform: lowercase;
+}
+.main-nav a:hover {
+  color: #fff;
+}
+
+.list-hover-slide li {
+  position: relative;
+  overflow: hidden;
+}
+.list-hover-slide a {
+  display: block;
+  position: relative;
+  z-index: 1;
+  transition: 0.35s ease color;
+}
+.list-hover-slide a:before {
+  content: '';
+  display: block;
+  z-index: -1;
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-right: solid 5px #df4500;
+  background: #3c3735;
+  transition: 0.35s ease left;
+}
+.list-hover-slide a.is-current:before,
+.list-hover-slide a:hover:before {
+  left: 0;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.yellow {
+  color: rgb(255, 166, 0);
+}
+
+.right-panel {
+  display: flex;
+  width: 100%;
+  background-color: #fffcf2ff;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  gap: 50px;
+}
+
+.static-welcome .title {
+  display: flex;
+  font: 600 3em 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  text-align: center;
+  height: 100px;
+  align-items: center;
+  justify-content: center;
+  text-decoration: underline;
+}
+
+.static-welcome .intro {
+  font: 300 1.2em 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.dynamic-content .dynamic-title {
+  display: flex;
+  font: 600 2em 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  text-align: center;
+  height: 100px;
+  align-items: center;
+  justify-content: center;
+  text-decoration: underline;
+}
+
+.dynamic-content ul {
+  list-style-type: none;
+  font: 500 1.5em 'Source Sans Pro', Helvetica, Arial, sans-serif;
+}
+
+.dynamic-ejs li {
+  display: flex;
+  justify-content: space-between;
+}
+
+form {
+  font: 500 2em 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.author-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.book-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+select#author {
+  width: 50%;
+}
+
+.book-form input[type='text'] {
+  width: 50%;
+}
+
+input[type='checkbox'] {
+  position: relative;
+  cursor: pointer;
+  appearance: none;
+  width: 80px;
+  height: 40px;
+  border-radius: 20px;
+  border: 2px solid #ccc;
+  outline: none;
+  transition: 0.3s;
+}
+input[type='checkbox']::before {
+  content: '';
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background: #ccc;
+  top: 3px;
+  left: 4px;
+  transition: 0.3s ease-in-out;
+}
+input[type='checkbox']:checked::before {
+  transform: translateX(37px);
+  background: #3399ff;
+}
+input[type='checkbox']:checked {
+  border-color: #3399ff;
+}
+.cb-label {
+  display: flex;
+  gap: 30px;
+  margin: 10px 0px;
+  align-items: center;
+  font-size: 1em;
+}
+
+.book-list-ul li,
+.author-list-ul li,
+.genre-list-ul li,
+.bookinstance-list-ul li {
+  padding: 20px 0px;
+  text-align: left;
+}
+
+a {
+  color: #02305d;
+}
+
+form {
+  width: 600px;
+}
+
+.book-instance-form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.book-instance-form select#book {
+  width: 50%;
+}
+
+.book-instance-form input[type='text'] {
+  width: 50%;
+}
+
+.book-instance-form input[type='date'] {
+  width: 50%;
+}
+
+.book-instance-form select#status {
+  width: 50%;
+}
+
+.author-lifespan {
+  font-size: 1.5em;
+}

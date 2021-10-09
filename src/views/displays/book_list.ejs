@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("../partials/head.ejs") %>
+
+  <body>
+    <%- include("../partials/layout.ejs")%>
+      <div class="right-panel">
+
+
+        <div class="dynamic-content" style="padding: 30px;">
+          <div class="dynamic-title">
+            <%= title %>
+          </div>
+          <ul class="book-list-ul">
+
+            <% book_list.forEach(book=> { %>
+              <li><a href=" <%= book.url %>">
+                  <%= book.title %>
+                </a> by <%= book.author.name %>
+              </li>
+
+              <% }) %>
+          </ul>
+        </div>
+      </div>
+
+  </body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+
+  <body>
+    <%- include("../partials/layout.ejs")%>
+      <div class="right-panel">
+
+
+        <div class="dynamic-content" style="padding: 30px">
+          <div class="dynamic-title">
+            <%= title %>
+          </div>
+          <ul class="bookinstance-list-ul">
+            <% bookinstance_list.forEach(book=> { %>
+          <li>
+            <a href=" <%= book.url %>">
+              <%= book.book.title %> : # <%= book.imprint %>
+            </a>
+            - <% if (book.status==='Available' ) { %>
+            <span class="green"> <%= book.status %> </span>
+            <% } else if (book.status==='Maintenance' ) { %>
+            <span class="yellow"> <%= book.status %> </span>
+            <% } else { %>
+            <span class="red"> <%= book.status %> </span>
+            <% } %> <% if(book.status !='Available' ) { %>
+            <span> Due: <%= book.due_back_f %> </span>
+            <%}%>
+          </li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

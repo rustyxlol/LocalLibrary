@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("../partials/head.ejs") %>
+
+  <body>
+    <%- include("../partials/layout.ejs")%>
+      <div class="right-panel">
+        <div class="dynamic-content" style="padding: 30px;">
+          <div class="dynamic-title">
+            <%= title %>
+          </div>
+
+          <form action="" method="post" class="bookinstance-form-wrapper">
+
+            <div class="book-instance-form dropdown">
+              <label for="book">Book: </label>
+              <select name="book" id="book">
+                <% books.forEach(book => { %>
+                  <option value="<%= book._id %>"> <%= book.title %> </option>
+                <% }) %>
+              </select>
+            </div>
+
+            <div class="book-instance-form">
+              <label for="imprint">Imprint:</label>
+              <input type="text" name="imprint" id="">
+            </div>
+
+            <div class="book-instance-form">
+              <label for="due_back">Due Back:</label>
+              <input type="date" name="due_back" id="">
+            </div>
+
+            <div class="book-instance-form dropdown">
+              <label for="status">Book Status: </label>
+              <select name="status" id="status">
+                <option value="Available">Available</option>
+                <option value="Loaned">Loaned</option>
+                <option value="Maintenance">Maintenance</option>
+                <option value="Reserved">Reserved</option>
+              </select>
+            </div>
+
+            <input type="submit" value="Submit">
+          </form>
+
+
+        </div>
+
+  </body>
+
+</html>

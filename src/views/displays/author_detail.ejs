@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+
+  <body>
+    <%- include("../partials/layout.ejs")%>
+      <div class="right-panel">
+
+
+        <div class="dynamic-content" style="padding: 30px">
+          <div class="dynamic-title">
+            <%= title %>
+          </div>
+          <div class="author-lifespan">
+            <%= author.dateBirth %>
+              <% if (author.date_of_death) { %>
+                &#8212;
+            <% } %>
+                <%= author.dateDeath %>
+          </div>
+          <hr />
+          <a href="<%= author.url %>/update">Update</a>
+
+
+            <% if(typeof book == 'object' && book.length > 0) { %>
+              <ul>
+              <% book.forEach(book=> { %>
+                <li><a href=" <%= book.url %>">
+                    <%= book.title %>
+                  </a> 
+                  <p><%= book.summary %> </p>
+                </li>
+                <% }); %>
+              </ul>
+            <% }  else { %>
+              BOOKS NOT FOUND
+            <% }%>
+        <br>
+        <a href="<%=author.url %>/delete">Delete Author</a>
+      </div>
+    </div>
+  </body>
+</html>

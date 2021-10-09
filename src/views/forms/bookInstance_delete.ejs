@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+
+  <body>
+    <%- include("../partials/layout.ejs")%>
+      <div class="right-panel">
+
+
+        <div class="dynamic-content" style="padding: 30px">
+          <div class="dynamic-title">
+            ID: <%= bookInstance._id %>
+          </div>
+          <hr>
+          <strong>Title: </strong>
+          <%= bookInstance.book.title %> <br>
+            <strong>Imprint: </strong>
+            <%= bookInstance.imprint %> <br>
+              <strong>Status: </strong>
+              <%= bookInstance.status %><br>
+                <% if(bookInstance.status !='Available' ) { %>
+                <strong> Due:</strong> <%= bookInstance.due_back_f %> 
+                <%}%>
+
+                <div class="delete-sure">Are you sure you want to delete this book?</div>
+                <form action="" method="post">
+                  <input type="hidden" name="bookinstanceid" value="<%= bookInstance._id %>">
+                  <input type="submit" value="Delete">
+                </form>
+        </div>
+      </div>
+  </body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("../partials/head.ejs") %>
+
+  <body>
+    <%- include("../partials/layout.ejs")%>
+      <div class="right-panel">
+
+
+        <div class="dynamic-content" style="padding: 30px;">
+          <div class="dynamic-title">
+            <%= title %>: <%= genre.name %>
+          </div>
+
+          <h3>Books</h3>
+          <% if(typeof genre_books == 'object' && genre_books.length > 0) { %>
+          <ul>
+            <% genre_books.forEach(book=> { %>
+              <li><a href=" <%= book.url %>">
+                  <%= book.title %>
+                </a>
+                <br>
+                <%= book.summary %> 
+              </li>
+              <br>
+              <% }) %>
+          </ul>
+          <% } else { %>
+            NO BOOKS FOUND UNDER THIS GENRE
+            <% } %>
+        </div>
+      </div>
+
+  </body>
+
+</html>

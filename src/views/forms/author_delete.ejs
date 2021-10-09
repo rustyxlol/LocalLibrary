@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+
+  <body>
+    <%- include("../partials/layout.ejs")%>
+      <div class="right-panel">
+
+
+        <div class="dynamic-content" style="padding: 30px">
+          <div class="dynamic-title">
+            <%= title %>
+          </div>
+          <div class="author-lifespan">
+            <%= author.dateBirth %>
+              <% if (typeof author.date_of_death !== 'undefined') { %>
+                &#8212;
+            <% } %>
+                <%= author.dateDeath %>
+          </div>
+          <hr />
+
+
+            <% if(typeof book == 'object' && book.length > 0) { %>
+              <div class="delete-message">Delete the following books before deleting the author</div>
+              <ul>
+              <% book.forEach(book=> { %>
+                <li><a href=" <%= book.url %>">
+                    <%= book.title %>
+                  </a> 
+                  <p><%= book.summary %> </p>
+                </li>
+                <% }); %>
+              </ul>
+            <% }  else { %>
+              <div class="delete-sure">Are you sure you want to delete this author?</div>
+              <form action="" method="post">
+                <input type="hidden" name="authorid" value="<%= author._id %>">
+                <input type="submit" value="Delete">
+              </form>
+            <% }%>
+        <br>
+      </div>
+    </div>
+  </body>
+</html>

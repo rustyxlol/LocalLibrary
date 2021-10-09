@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("../partials/head.ejs") %>
+
+  <body>
+    <%- include("../partials/layout.ejs")%>
+      <div class="right-panel">
+        <div class="static-welcome">
+          <div class="title">Home</div>
+          <div class="intro">
+            <p> Welcome to my local library, apparently a very basic library according to the tutorial on MDN but only
+              the
+              ones
+              who are doing this for the first time will know how excruciating this whole thing has been</p>
+          </div>
+
+        </div>
+
+        <div class="dynamic-content">
+          <div class="dynamic-title">
+            We currently have:
+          </div>
+          <div class="dynamic-ejs">
+            <ul>
+              <li><strong class="li-ejs">
+                  <%= data.book_count %>
+                </strong> Books
+              </li>
+              <li><strong class="li-ejs">
+                  <%= data.book_instance_count %>
+                </strong> Copies
+              </li>
+              <li><strong class="li-ejs">
+                  <%= data.book_instance_available %>
+                </strong> Copies Available
+              </li>
+              <li><strong class="li-ejs">
+                  <%= data.author_count %>
+                </strong>Authors
+              </li>
+              <li><strong class="li-ejs">
+                  <%= data.genre_count %>
+                </strong>Genres
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+  </body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+
+  <body>
+    <%- include("../partials/layout.ejs")%>
+      <div class="right-panel">
+        <div class="dynamic-content" style="padding: 30px">
+          <div class="dynamic-title">
+            <%= title %>
+          </div>
+          <strong>Author: </strong>
+          <a href="<%= book.author.url %>">
+            <%= book.author.name %>
+          </a>
+          <div class="p">
+            <%= book.summary %>
+          </div>
+          <strong>ISBN:</strong>
+          <%= book.isbn %><br />
+            <strong>Genre:</strong>
+            <% (book.genre).forEach((genre, i) => { %>
+        <a href="<%=genre.url%>"><%= genre.name %></a><%= ( (book.genre).length
+        > 0 && i < (book.genre).length-1 ? ', ' : '' ) %> <% }) %> <br /><br />
+        <a href="<%= book.url %>/update">Update</a>
+        <hr />
+        <h2>Copies</h2>
+
+        <% if(typeof book_instance == 'object' && book_instance.length > 0) { %>
+          <div class="delete-message">Delete the following book instances before deleting this book</div>
+        <% book_instance.forEach(book=> { %> <% if (book.status==='Available' )
+        { %>
+        <span class="green"> <%= book.status %> </span>
+        <% } else if (book.status==='Maintenance' ) { %>
+        <span class="yellow"> <%= book.status %> </span>
+        <% } else { %>
+        <span class="red"> <%= book.status %> </span>
+        <% } %> <% if(book.status !='Available' ) { %>
+
+        <br />
+        <span> <strong>Due: </strong> <%= book.due_back_f %> </span>
+        <%}%>
+        <br />
+        <span> <strong>Imprint: </strong><%= book.imprint %> </span>
+        <br />
+        <span>
+          <strong>ID: </strong> <a href="<%= book.url %>"><%= book._id %></a>
+        </span>
+        <br />
+        <br />
+        <% }) %> <% } else { %> 
+          <div class="delete-sure">Are you sure you want to delete this book?</div>
+              <form action="" method="post">
+                <input type="hidden" name="bookid" value="<%= book._id %>">
+                <input type="submit" value="Delete">
+              </form>
+          <% } %>
+      </div>
+    </div>
+  </body>
+</html>
