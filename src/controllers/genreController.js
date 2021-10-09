@@ -10,7 +10,6 @@ const genre_create_get = (req, res) => {
 const genre_create_post = (req, res, next) => {
   const genre = new Genre(req.body);
   if (genre.name.trim().length <= 1) {
-    console.log('here');
     res.render('./forms/genre_form', {
       title: 'Create Genre',
       genre: genre,
@@ -32,18 +31,76 @@ const genre_create_post = (req, res, next) => {
 };
 
 const genre_delete_get = (req, res) => {
-  res.send('cannot lol');
+  async.parallel(
+    {
+      genre: function (callback) {
+        Genre.findById(req.params.id).exec(callback);
+      },
+
+      genre_books: function (callback) {
+        Book.find({ author: req.params.id }).exec(callback);
+      },
+    },
+    function (err, results, next) {
+      if (err) return next(err);
+      res.render('./forms/genre_delete', {
+        title: 'Delete Genre',
+        genre: results.genre,
+        genre_books: results.genre_books,
+      });
+    }
+  );
 };
 
 const genre_delete_post = (req, res) => {
-  res.send('cannot lol');
+  async.parallel(
+    {
+      genre: function (callback) {
+        Genre.findById(req.params.id).exec(callback);
+      },
+
+      genre_books: function (callback) {
+        Book.find({ author: req.params.id }).exec(callback);
+      },
+    },
+    function (err, results, next) {
+      if (err) return next(err);
+      if (results.genre_books.length > 0) {
+        res.render('genre_delete', {
+          title: 'Delete genre',
+          genre: results.genre,
+          genre_books: results.genre_books,
+        });
+        return;
+      } else {
+        Genre.findByIdAndDelete(req.body.genreid, function (err, results) {
+          if (err) return next(err);
+          res.redirect('/catalog/genres');
+        });
+      }
+    }
+  );
 };
 
 const genre_update_get = (req, res) => {
-  res.send('cannot lol');
+  const genre = Genre.findById(req.params.id, function (err, genre) {
+    res.render('./forms/genre_form', {
+      title: 'Update Genre: ' + genre.name,
+      error: '',
+    });
+  });
 };
 const genre_update_post = (req, res) => {
-  res.send('cannot lol');
+  const genre = new Genre({
+    name: req.body.name,
+    _id: req.params.id,
+  });
+
+  Genre.findByIdAndUpdate(req.params.id, genre)
+    .then((results) => {
+      res.redirect('/catalog/genre/' + results._id);
+    })
+    .catch((err) => console.log(err));
 };
 
 // Shows Genre Books

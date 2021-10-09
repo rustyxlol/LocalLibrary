@@ -12,7 +12,6 @@ const author_create_post = (req, res) => {
     author.firstName.trim().length <= 1 &&
     author.lastName.trim().length <= 1
   ) {
-    console.log('here');
     res.render('./forms/author_form', {
       title: 'Create Author',
       author: author,
@@ -82,7 +81,6 @@ const author_delete_post = (req, res) => {
       } else {
         Author.findByIdAndDelete(req.body.authorid, function (err, results) {
           if (err) return next(err);
-          console.log('Deleted', results);
           res.redirect('/catalog/authors');
         });
       }
@@ -126,11 +124,9 @@ const author_update_post = (req, res) => {
     date_of_death: req.body.date_of_death,
     _id: req.params.id,
   });
-  console.log(author);
 
   Author.findByIdAndUpdate(req.params.id, author)
     .then((results) => {
-      console.log('done');
       res.redirect('/catalog/author/' + results._id);
     })
     .catch((err) => console.log(err));

@@ -131,7 +131,6 @@ const book_delete_post = (req, res) => {
       } else {
         Book.findByIdAndDelete(req.body.bookid, function (err, results) {
           if (err) return next(err);
-          console.log(results);
           res.redirect('/catalog/books');
         });
       }
