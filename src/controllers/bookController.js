@@ -218,7 +218,6 @@ const book_list = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      //Successful, so render
       res.render('./displays/book_list', {
         title: 'Books we provide',
         book_list: list_books,

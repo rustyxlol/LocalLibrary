@@ -95,11 +95,9 @@ const bookInstance_list = (req, res, next) => {
   BookInstance.find()
     .populate('book')
     .exec(function (err, list_bookinstances) {
-      // Use this instead of callback
       if (err) {
         return next(err);
       }
-      // Successful, so render
       res.render('./displays/bookinstance_list', {
         title: 'All Books',
         bookinstance_list: list_bookinstances,

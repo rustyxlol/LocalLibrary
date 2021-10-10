@@ -21,12 +21,12 @@ const BookInstanceSchema = new Schema({
   due_back: { type: Date, default: Date.now },
 });
 
-BookInstanceSchema.virtual('url').get(function () {
-  return '/catalog/bookInstance/' + this._id;
-});
-
 BookInstanceSchema.virtual('due_back_f').get(function () {
   return DateTime.fromJSDate(this.due_back).toLocaleString(DateTime.DATE_MED);
+});
+
+BookInstanceSchema.virtual('url').get(function () {
+  return '/catalog/bookInstance/' + this._id;
 });
 
 module.exports = mongoose.model('BookInstance', BookInstanceSchema);

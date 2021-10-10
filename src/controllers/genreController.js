@@ -17,6 +17,7 @@ const genre_create_post = (req, res, next) => {
     });
     return next();
   }
+
   Genre.findOne({ name: genre.name }).exec(function (err, result) {
     if (result) {
       res.redirect('/catalog/genre/' + result._id);
@@ -103,7 +104,6 @@ const genre_update_post = (req, res) => {
     .catch((err) => console.log(err));
 };
 
-// Shows Genre Books
 const genre_detail = (req, res) => {
   async.parallel(
     {

@@ -90,30 +90,6 @@ const author_delete_post = (req, res) => {
 
 const author_update_get = (req, res) => {
   res.render('./forms/author_form', { title: 'Update Author' });
-
-  // async.parallel(
-  //   {
-  //     author: function (callback) {
-  //       Author.findById(req.params.id).exec(callback);
-  //     },
-  //     book: function (callback) {
-  //       Book.find(callback);
-  //     },
-  //   },
-  //   function (err, results) {
-  //     if (err) {
-  //       return next(err);
-  //     }
-  //     if (results.author == null) {
-  //       return next(err);
-  //     }
-  //     res.render('./forms/author_form', {
-  //       title: 'Update Author',
-  //       author: results.author,
-  //       book: results.book,
-  //     });
-  //   }
-  // );
 };
 
 const author_update_post = (req, res) => {
