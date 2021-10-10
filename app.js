@@ -4,6 +4,8 @@ const logger = require('morgan');
 const path = require('path');
 const routes = require('./src/routes/users');
 const mongoose = require('mongoose');
+const PORT = process.env.PORT || 3000;
+
 const mongoDB = `mongodb+srv://${process.env.mongo_user}:${process.env.mongo_password}@cluster0.fsthn.mongodb.net/${process.env.mongo_user}?retryWrites=true&w=majority`;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
@@ -31,6 +33,6 @@ app.use('/', (req, res) => {
   res.render('./displays/404', { title: '404 Not Found' });
 });
 
-app.listen(3000, 'localhost', () => {
-  console.log('listening on port 3000');
+app.listen(PORT, () => {
+  console.log('listening');
 });
