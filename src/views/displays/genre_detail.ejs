@@ -12,8 +12,10 @@
           <div class="dynamic-title">
             <%= title %>: <%= genre.name %>
           </div>
-
-          <h3>Books</h3>
+          <a href="<%= genre.url %>/update">Update Genre</a>
+          <br>
+          <a href="<%=genre.url %>/delete">Delete Genre</a>
+          <hr>
           <% if(typeof genre_books == 'object' && genre_books.length > 0) { %>
           <ul>
             <% genre_books.forEach(book=> { %>
@@ -21,7 +23,7 @@
                   <%= book.title %>
                 </a>
                 <br>
-                <%= book.summary %> 
+                <p class="book-summary"><%= book.summary %> </p>
               </li>
               <br>
               <% }) %>
@@ -30,9 +32,7 @@
             NO BOOKS FOUND UNDER THIS GENRE
             <% } %>
             <br>
-        <a href="<%=genre.url %>/delete">Delete Genre</a>
-        <br>
-        <a href="<%= genre.url %>/update">Update</a>
+
 
         </div>
       </div>

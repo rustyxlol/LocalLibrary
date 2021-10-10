@@ -1,23 +1,10 @@
-/**
- * 1. Add databse URL
- * 2. Connect to database
- * 3. Set view engines
- * middle ware start
- * 4. Set css folder
- * 5. Set encoding for json
- * 6. Set morgan
- * middleware end
- * 7. Serve routes.
- */
 const express = require('express');
 const app = express();
 const logger = require('morgan');
 const path = require('path');
 const routes = require('./src/routes/users');
 const mongoose = require('mongoose');
-const mongoDB =
-  'mongodb+srv://local_library:admin@cluster0.fsthn.mongodb.net/local_library?retryWrites=true&w=majority';
-
+const mongoDB = `mongodb+srv://${process.env.mongo_user}:${process.env.mongo_password}@cluster0.fsthn.mongodb.net/${process.env.mongo_user}?retryWrites=true&w=majority`;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

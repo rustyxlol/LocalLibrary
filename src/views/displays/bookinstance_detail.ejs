@@ -12,15 +12,17 @@
             ID: <%= bookInstance._id %>
           </div>
           <hr>
-          <strong>Title: </strong>
-          <%= bookInstance.book.title %> <br>
-            <strong>Imprint: </strong>
-            <%= bookInstance.imprint %> <br>
-              <strong>Status: </strong>
-              <%= bookInstance.status %><br>
-                <% if(bookInstance.status !='Available' ) { %>
-                <strong> Due:</strong> <%= bookInstance.due_back_f %> 
-                <%}%>
+          <div class="book-instance-wrapper">
+            <strong>Title: </strong>
+            <%= bookInstance.book.title %> <br>
+              <strong>Imprint: </strong>
+              <%= bookInstance.imprint %> <br>
+                <strong>Status: </strong>
+                <%= bookInstance.status %><br>
+                  <% if(bookInstance.status !='Available' ) { %>
+                  <strong> Due:</strong> <%= bookInstance.due_back_f %>
+                  <%}%>
+          </div>
                 <br>
                 <a href="<%=bookInstance.url %>/delete">Delete Book Instance</a>
                 <br>

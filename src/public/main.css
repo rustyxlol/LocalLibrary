@@ -6,6 +6,7 @@
   box-sizing: border-box;
 }
 body {
+  font-family: 'Times New Roman', Times, serif;
   display: flex;
   /* min-height: 100vh; */
 }
@@ -162,6 +163,10 @@ span.library {
   text-decoration: underline;
 }
 
+.dynamic-content {
+  width: 100%;
+}
+
 .dynamic-content ul {
   list-style-type: none;
   font: 500 1.5em 'Source Sans Pro', Helvetica, Arial, sans-serif;
@@ -275,4 +280,22 @@ form {
 
 .author-lifespan {
   font-size: 1.5em;
+}
+
+.book-detail-wrapper,
+.book-instance-wrapper {
+  font-size: 1.5em;
+}
+
+.book-summary {
+  font-size: 0.8em;
+}
+
+.index-ejs {
+  display: flex;
+  justify-content: center;
+}
+
+.index-ul {
+  width: 400px;
 }

@@ -18,17 +18,19 @@
             <% } %>
                 <%= author.dateDeath %>
           </div>
+          <a href="<%= author.url %>/update">Update Author</a> <br>
+          <a href="<%=author.url %>/delete">Delete Author</a>
           <hr />
-          <a href="<%= author.url %>/update">Update</a>
 
 
             <% if(typeof book == 'object' && book.length > 0) { %>
               <ul>
+
               <% book.forEach(book=> { %>
                 <li><a href=" <%= book.url %>">
                     <%= book.title %>
                   </a> 
-                  <p><%= book.summary %> </p>
+                  <p class="book-summary"><%= book.summary %> </p>
                 </li>
                 <% }); %>
               </ul>
@@ -36,7 +38,6 @@
               BOOKS NOT FOUND
             <% }%>
         <br>
-        <a href="<%=author.url %>/delete">Delete Author</a>
       </div>
     </div>
   </body>
