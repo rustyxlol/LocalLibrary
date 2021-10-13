@@ -4,7 +4,7 @@ const Author = require('../models/author');
 const Genre = require('../models/genre');
 const async = require('async');
 
-const index = (req, res) => {
+const index = (req, res, next) => {
   async.parallel(
     {
       book_count: function (callback) {
@@ -27,7 +27,7 @@ const index = (req, res) => {
         Genre.countDocuments({}, callback);
       },
     },
-    function (err, results, next) {
+    function (err, results) {
       if (err) next(err);
       res.render('./displays/index', {
         title: 'Home',
@@ -37,7 +37,7 @@ const index = (req, res) => {
   );
 };
 
-const book_create_get = (req, res) => {
+const book_create_get = (req, res, next) => {
   async.parallel(
     {
       authors: function (callback) {
@@ -47,7 +47,7 @@ const book_create_get = (req, res) => {
         Genre.find(callback);
       },
     },
-    function (err, results, next) {
+    function (err, results) {
       if (err) return next(err);
       res.render('./forms/book_form', {
         title: 'Create Book',
@@ -58,7 +58,7 @@ const book_create_get = (req, res) => {
   );
 };
 
-const book_create_post = (req, res) => {
+const book_create_post = (req, res, next) => {
   const book = new Book({
     title: req.body.title,
     author: req.body.author,
@@ -69,7 +69,7 @@ const book_create_post = (req, res) => {
 
   Book.findOne({
     isbn: book.isbn,
-  }).exec(function (err, result, next) {
+  }).exec(function (err, result) {
     if (result) {
       res.redirect('/catalog/book/' + result._id);
     } else {
@@ -83,7 +83,7 @@ const book_create_post = (req, res) => {
   });
 };
 
-const book_delete_get = (req, res) => {
+const book_delete_get = (req, res, next) => {
   async.parallel(
     {
       book: function (callback) {
@@ -96,7 +96,7 @@ const book_delete_get = (req, res) => {
         BookInstance.find({ book: req.params.id }).exec(callback);
       },
     },
-    function (err, results, next) {
+    function (err, results) {
       if (err) next(err);
       res.render('./forms/book_delete', {
         title: results.book.title,
@@ -107,7 +107,7 @@ const book_delete_get = (req, res) => {
   );
 };
 
-const book_delete_post = (req, res) => {
+const book_delete_post = (req, res, next) => {
   async.parallel(
     {
       book: function (callback) {
@@ -120,7 +120,7 @@ const book_delete_post = (req, res) => {
         BookInstance.find({ book: req.params.id }).exec(callback);
       },
     },
-    function (err, results, next) {
+    function (err, results) {
       if (err) next(err);
       if (results.book_instance.length > 0) {
         res.render('book_delete', {
@@ -138,7 +138,7 @@ const book_delete_post = (req, res) => {
   );
 };
 
-const book_update_get = (req, res) => {
+const book_update_get = (req, res, next) => {
   async.parallel(
     {
       book: function (callback) {
@@ -154,7 +154,7 @@ const book_update_get = (req, res) => {
         Genre.find(callback);
       },
     },
-    function (err, results, next) {
+    function (err, results) {
       if (err) {
         return next(err);
       }
@@ -187,7 +187,7 @@ const book_update_post = (req, res) => {
     .catch((err) => console.log(err));
 };
 
-const book_detail = (req, res) => {
+const book_detail = (req, res, next) => {
   async.parallel(
     {
       book: function (callback) {
@@ -200,7 +200,7 @@ const book_detail = (req, res) => {
         BookInstance.find({ book: req.params.id }).exec(callback);
       },
     },
-    function (err, results, next) {
+    function (err, results) {
       if (err) next(err);
       res.render('./displays/book_detail', {
         title: results.book.title,

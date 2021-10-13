@@ -53,7 +53,7 @@ const genre_delete_get = (req, res) => {
   );
 };
 
-const genre_delete_post = (req, res) => {
+const genre_delete_post = (req, res, next) => {
   async.parallel(
     {
       genre: function (callback) {
@@ -64,7 +64,7 @@ const genre_delete_post = (req, res) => {
         Book.find({ author: req.params.id }).exec(callback);
       },
     },
-    function (err, results, next) {
+    function (err, results) {
       if (err) return next(err);
       if (results.genre_books.length > 0) {
         res.render('genre_delete', {
@@ -84,7 +84,7 @@ const genre_delete_post = (req, res) => {
 };
 
 const genre_update_get = (req, res) => {
-  const genre = Genre.findById(req.params.id, function (err, genre) {
+  const findGenre = Genre.findById(req.params.id, function (err, genre) {
     res.render('./forms/genre_form', {
       title: 'Update Genre: ' + genre.name,
       error: '',
@@ -104,7 +104,7 @@ const genre_update_post = (req, res) => {
     .catch((err) => console.log(err));
 };
 
-const genre_detail = (req, res) => {
+const genre_detail = (req, res, next) => {
   async.parallel(
     {
       genre: function (callback) {
@@ -115,7 +115,7 @@ const genre_detail = (req, res) => {
         Book.find({ genre: req.params.id }).exec(callback);
       },
     },
-    function (err, results, next) {
+    function (err, results) {
       if (err) next(err);
       if (results.genre === null) {
         const error = new Error('Genre not found');

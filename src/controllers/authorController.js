@@ -6,7 +6,7 @@ const author_create_get = (req, res) => {
   res.render('./forms/author_form', { title: 'Create Author' });
 };
 
-const author_create_post = (req, res) => {
+const author_create_post = (req, res, next) => {
   const author = new Author(req.body);
   if (
     author.firstName.trim().length <= 1 &&
@@ -23,7 +23,7 @@ const author_create_post = (req, res) => {
   Author.findOne({
     firstName: author.firstName,
     lastName: author.lastName,
-  }).exec(function (err, result, next) {
+  }).exec(function (err, result) {
     if (result) {
       res.redirect('/catalog/author/' + result._id);
       return;
@@ -36,7 +36,7 @@ const author_create_post = (req, res) => {
   });
 };
 
-const author_delete_get = (req, res) => {
+const author_delete_get = (req, res, next) => {
   async.parallel(
     {
       author: function (callback) {
@@ -47,7 +47,7 @@ const author_delete_get = (req, res) => {
         Book.find({ author: req.params.id }).exec(callback);
       },
     },
-    function (err, results, next) {
+    function (err, results) {
       if (err) return next(err);
       res.render('./forms/author_delete', {
         title: results.author.name,
@@ -58,7 +58,7 @@ const author_delete_get = (req, res) => {
   );
 };
 
-const author_delete_post = (req, res) => {
+const author_delete_post = (req, res, next) => {
   async.parallel(
     {
       author: function (callback) {
@@ -69,7 +69,7 @@ const author_delete_post = (req, res) => {
         Book.find({ author: req.body.authorid }).exec(callback);
       },
     },
-    function (err, results, next) {
+    function (err, results) {
       if (err) return next(err);
       if (results.book.length > 0) {
         res.render('author_delete', {
@@ -108,7 +108,7 @@ const author_update_post = (req, res) => {
     .catch((err) => console.log(err));
 };
 
-const author_detail = (req, res) => {
+const author_detail = (req, res, next) => {
   async.parallel(
     {
       author: function (callback) {
@@ -119,7 +119,7 @@ const author_detail = (req, res) => {
         Book.find({ author: req.params.id }).exec(callback);
       },
     },
-    function (err, results, next) {
+    function (err, results) {
       if (err) return next(err);
       res.render('./displays/author_detail', {
         title: results.author.name,
