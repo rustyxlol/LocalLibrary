@@ -1,0 +1,50 @@
+<%- include('./partials/head'); -%>
+  <%- include('./partials/layout'); -%>
+
+    <form>
+      <h1>Signup</h1>
+      <label for="email">Email</label>
+      <input type="text" name="email" required>
+      <div class="email error"></div>
+      <label for="password">Password</label>
+      <input type="password" name="password" required>
+      <div class="password error"></div>
+      <button type="submit">Signup</button>
+    </form>
+
+    <script type="text/javascript">
+
+      const emailError = document.querySelector('.email.error');
+      const pwError = document.querySelector('.password.error');
+
+      const form = document.querySelector('form');
+      form.addEventListener('submit', async (e) => {
+        emailError.textContent = ''
+        pwError.textContent = ''
+        e.preventDefault();
+        const email = form.email.value;
+        const password = form.password.value;
+
+        try {
+          const result = await fetch('/signup', {
+            method: "POST",
+            body: JSON.stringify({ email, password }),
+            headers: { 'Content-Type': 'application/json' },
+          })
+          const retVal = await result.json();
+          if (retVal.error) {
+            emailError.textContent = retVal.error.email;
+            pwError.textContent = retVal.error.password;
+          }
+          if (retVal.user) {
+            location.assign('/');
+          }
+        }
+        catch (err) {
+          console.log(err);
+        }
+
+      })
+
+
+    </script>

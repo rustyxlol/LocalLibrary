@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
+const userRoutes = require('./src/routes/routes');
+const cookieParser = require('cookie-parser');
+const { requireAuth, checkUser } = require('./src/middleware/authMiddleware');
 
 const logger = require('morgan');
 const path = require('path');
@@ -24,12 +27,16 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(logger('dev'));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
+app.use(express.json());
+app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'src/public')));
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/*', checkUser);
 app.use('/', indexRouter);
-app.use('/catalog', catalogRouter);
+app.use('/catalog', requireAuth, catalogRouter);
+app.use(userRoutes);
 app.use('/', (req, res) => {
   res.render('./displays/404', { title: '404 Not Found' });
 });
